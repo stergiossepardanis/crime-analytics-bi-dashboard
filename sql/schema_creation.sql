@@ -30,6 +30,7 @@ CREATE TABLE dbo.crime_import (
     lon FLOAT NOT NULL
 );
 
+
 -- Dimension table for geographic areas
 CREATE TABLE dbo.dimArea (
     area_id INT IDENTITY (1,1) PRIMARY KEY,
@@ -41,6 +42,7 @@ CREATE TABLE dbo.dimArea (
     lat FLOAT NOT NULL,
     lon FLOAT NOT NULL
   );
+
 
 -- Dimension table for crime classifications
 CREATE TABLE dbo.dimCrime (
@@ -57,12 +59,14 @@ CREATE TABLE dbo.dimCrime (
     status_desc VARCHAR(50) NOT NULL
   );
 
+
 -- Dimension table for premises (crime locations)
 CREATE TABLE dbo.dimPremise (
     premis_id INT IDENTITY (1,1) PRIMARY KEY,
     premis_cd INT NULL,
     premis_desc VARCHAR(200) NOT NULL
   );
+
 
 -- Dimension table for victim demographics
 CREATE TABLE dbo.dimVictim (
@@ -72,12 +76,14 @@ CREATE TABLE dbo.dimVictim (
     vict_descent CHAR(1) NOT NULL
   );
 
+
 -- Dimension table for weapon information
 CREATE TABLE dbo.dimWeapon (
     weapon_id INT IDENTITY (1,1) PRIMARY KEY,
     weapon_used_cd INT NULL,
     weapon_desc VARCHAR(200) NULL
   );
+
 
 -- Fact table linking all dimensions (star schema)
 CREATE TABLE dbo.factCrime (

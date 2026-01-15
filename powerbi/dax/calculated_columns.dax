@@ -1,0 +1,23 @@
+-- Time-of-day category based on occurrence hour
+period_of_day =
+SWITCH (
+    TRUE (),
+    HOUR ( factCrime[time_occ] ) >= 0
+        && HOUR ( factCrime[time_occ] ) < 6, "Night (00:00–05:59)",
+    HOUR ( factCrime[time_occ] ) >= 6
+        && HOUR ( factCrime[time_occ] ) < 12, "Morning (06:00–11:59)",
+    HOUR ( factCrime[time_occ] ) >= 12
+        && HOUR ( factCrime[time_occ] ) < 18, "Afternoon (12:00–17:59)",
+    HOUR ( factCrime[time_occ] ) >= 18
+        && HOUR ( factCrime[time_occ] ) <= 23, "Evening (18:00–23:59)"
+)
+
+
+-- Day of week extracted from occurrence date
+day_of_week =
+FORMAT ( [date_occ], "dddd" )
+
+
+-- Hour bucket formatted as HH:00
+hour_of_day =
+FORMAT ( HOUR ( factCrime[time_occ] ), "00" ) & ":00"

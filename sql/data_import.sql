@@ -9,6 +9,7 @@ WITH (
     TABLOCK
 );
 
+
 -- Populate dimArea with unique geographic area records
 INSERT INTO dbo.dimArea (
     area,
@@ -28,6 +29,7 @@ SELECT DISTINCT
     lat,
     lon
 FROM dbo.crime_import;
+
 
 -- Populate dimCrime with unique crime classification records
 INSERT INTO dbo.dimCrime (
@@ -55,6 +57,7 @@ SELECT DISTINCT
     status_desc
 FROM dbo.crime_import;
 
+
 -- Populate dimPremise with unique premise/location records
 INSERT INTO dbo.dimPremise (
     premis_cd,
@@ -64,6 +67,7 @@ SELECT DISTINCT
     premis_cd,
     premis_desc
 FROM dbo.crime_import;
+
 
 -- Populate dimVictim with unique victim demographic records
 INSERT INTO dbo.dimVictim (
@@ -77,6 +81,7 @@ SELECT DISTINCT
     vict_descent
 FROM dbo.crime_import;
 
+
 -- Populate dimWeapon with unique weapon records
 INSERT INTO dbo.dimWeapon (
     weapon_used_cd,
@@ -86,6 +91,7 @@ SELECT DISTINCT
     weapon_used_cd,
     weapon_desc
 FROM dbo.crime_import;
+
 
 -- Load factCrime by joining staging table with all dimensions (star schema)
 BEGIN TRANSACTION;

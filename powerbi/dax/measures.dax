@@ -1,0 +1,45 @@
+-- Average reporting delay (in days)
+avg_delay =
+AVERAGE ( factCrime[delay] )
+
+
+-- Percentage of crimes involving a weapon (excluding code 10)
+weapon_percent =
+DIVIDE (
+    CALCULATE (
+        COUNTROWS ( factCrime ),
+        factCrime[weapon_id] <> 10
+    ),
+    COUNTROWS ( factCrime )
+)
+
+
+-- Average victim age (excluding invalid or missing values)
+avg_vict_age =
+AVERAGEX (
+    FILTER (
+        factCrime,
+        RELATED ( dimVictim[vict_age] ) > 0
+    ),
+    RELATED ( dimVictim[vict_age] )
+)
+
+
+-- Percentage of cases with a closed/cleared status
+closed_percent =
+DIVIDE (
+    CALCULATE (
+        COUNTROWS ( factCrime ),
+        dimCrime[Status] IN {
+            "Adult Arrest",
+            "Adult Other",
+            "Juv Arrest",
+            "Juv Other"
+        }
+    ),
+    CALCULATE (
+        COUNTROWS ( factCrime ),
+        NOT dimCrime[Status] IN { "UNK" }
+    ),
+    0
+)
